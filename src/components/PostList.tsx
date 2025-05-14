@@ -1,24 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../supabase-client";
 import { PostItem } from "./PostItem";
-
-export interface Post {
-  id: number;
-  title: string;
-  content: string;
-  image_url: string;
-  created_at: string;
-}
+import type { Post } from "../types/Post";
 
 const fetchPosts = async (): Promise<Post[]> => {
-  const {data, error} = await supabase
+  const { data, error } = await supabase
     .from("posts")
     .select("*")
     .order("created_at", { ascending: false });
 
-    if (error) throw new Error(error.message)
+  if (error) throw new Error(error.message);
 
-      return data as Post[]
+  return data as Post[];
 };
 
 export const PostList = () => {
@@ -27,22 +20,21 @@ export const PostList = () => {
     queryFn: fetchPosts,
   });
 
-  if (isLoading) <div>Loading posts...</div>
-
-  if (error) {
-    return <div> Error: {error.message}</div>
+  if (isLoading) {
+    return <div>Loading posts...</div>;
   }
 
+  if (error) {
+    return <div> Error: {error.message}</div>;
+  }
 
-  console.log(data)
+  console.log(data);
 
   return (
     <div className="flex flex-wrap gap-6 justify-center">
-      {
-        data?.map((post, key) => (
-          <PostItem key={key} post={post} />
-        ))
-      }
+      {data?.map((post, key) => (
+        <PostItem key={key} post={post} />
+      ))}
     </div>
   );
 };
