@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../supabase-client";
-import { PostItem } from "./PostItem";
 import type { Post } from "../types/Post";
+import { PostItem } from "./PostItem";
 
 const fetchPosts = async (): Promise<Post[]> => {
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const { data, error } = await supabase.rpc("get_posts_with_counts");
 
   if (error) throw new Error(error.message);
 
