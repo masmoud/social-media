@@ -1,16 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../hooks/useAuth";
 import { supabase } from "../supabase-client";
+import type { Vote } from "../types/Vote";
 
 interface Props {
   postId: number;
-}
-
-interface Vote {
-  id: number;
-  post_id: number;
-  user_id: string;
-  vote: number;
 }
 
 const vote = async (voteValue: number, postId: number, userId: string) => {
