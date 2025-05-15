@@ -1,54 +1,111 @@
-# React + TypeScript + Vite
+# Social Media App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal social media platform built with **React 19**, **Supabase**, **TailwindCSS**, and **TanStack Query**.
 
-Currently, two official plugins are available:
+This project helped me learn how to:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Integrate **Supabase** for database and authentication
+- Use **TanStack Query** for efficient data fetching and mutation
+- Manage global state with **Context API**
+- Organize frontend with modern React practices and routing
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🔗 Live Demo
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+👉 [Try the app here](https://your-deployment-link.com)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📸 Screenshots
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Homepage with recent posts  
+  ![Homepage Screenshot](./docs/screenshots/home.png)
+
+- Create post page  
+  ![Create Post Screenshot](./docs/screenshots/createpostpage.png)  
+
+- Comment & Reply Section  
+  ![Post Detail Screenshot](./docs/screenshots/postpage.png)
+
+- Create community page  
+  ![Create Community Screenshot](./docs/screenshots/newcommunitypage.png) 
+
+- Community list page  
+  ![Community List Screenshot](./docs/screenshots/communitiespage.png) 
+
+- Community with posts  
+  ![Community Page Screenshot](./docs/screenshots/communitypage.png) 
+
+- Comment & Reply Section  
+  ![Post Detail Screenshot](./docs/screenshots/postpage.png)
+
+---
+
+## 📄 Pages & Features
+
+### Homepage
+- Displays a list of all user posts
+- Each post shows the author, the image, and a link to its details
+
+### Create Community
+- Allows authenticated users to create and submit a new community
+- Each community shows the name, description, and a link to its details
+
+### Communities
+- Displays a list of all communities
+- Each community shows the name, description, and a link to its details
+
+### Community Details
+- Shows a specific community and its posts
+- Users can:
+  - View posts with the counts of likes, comments, and replies
+  - Access the posts of the community
+
+### Create Post
+- Allows authenticated users to create and submit a new post
+- User can choose a community to post in
+
+### Post Details
+- Shows a specific post and its comments
+- Users can:
+  - View comments
+  - Reply to comments
+  - See nested comment threads
+
+---
+
+## Tech Stack
+
+- **React 19**
+- **Supabase** (Auth + DB)
+- **TailwindCSS**
+- **TanStack Query**
+- **React Router v7**
+- **Context API**
+
+---
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+````
+
+---
+
+## What I Learned
+
+* Connecting Supabase for authentication and real-time database features
+* Organizing React state with the Context API
+* Leveraging TanStack Query for powerful caching and mutation handling
+* Building a clean and functional UI with TailwindCSS
+
+---
+
+## Author
+
+Made by [Mohamed Amoussa](https://amoussamohamed.fr)
+
+
