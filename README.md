@@ -2,110 +2,106 @@
 
 A minimal social media platform built with **React 19**, **Supabase**, **TailwindCSS**, and **TanStack Query**.
 
-This project helped me learn how to:
+This project helped me learn to:
 
-- Integrate **Supabase** for database and authentication
-- Use **TanStack Query** for efficient data fetching and mutation
-- Manage global state with **Context API**
-- Organize frontend with modern React practices and routing
+* Integrate **Supabase** for authentication and database features
+* Use **TanStack Query** for efficient data fetching and mutations
+* Manage global state using **Context API**
+* Build clean, modern UIs with **TailwindCSS** and **React Router v7**
 
 ---
 
 ## 🔗 Live Demo
 
-👉 [Try the app here](https://your-deployment-link.com)
+👉 [Try the app](https://your-deployment-link.com)
 
 ---
 
 ## 📸 Screenshots
 
-- Homepage with recent posts  
-  ![Homepage Screenshot](./docs/screenshots/home.png)
-
-- Create post page  
-  ![Create Post Screenshot](./docs/screenshots/createpostpage.png)  
-
-- Comment & Reply Section  
-  ![Post Detail Screenshot](./docs/screenshots/postpage.png)
-
-- Create community page  
-  ![Create Community Screenshot](./docs/screenshots/newcommunitypage.png) 
-
-- Community list page  
-  ![Community List Screenshot](./docs/screenshots/communitiespage.png) 
-
-- Community with posts  
-  ![Community Page Screenshot](./docs/screenshots/communitypage.png) 
-
-- Comment & Reply Section  
-  ![Post Detail Screenshot](./docs/screenshots/postpage.png)
+| Page             | Screenshot                                                   |
+| ---------------- | ------------------------------------------------------------ |
+| Homepage         | ![Homepage](./docs/screenshots/home.png)                     |
+| Create Post      | ![Create Post](./docs/screenshots/createpostpage.png)        |
+| Post Details     | ![Post Detail](./docs/screenshots/postpage.png)              |
+| Create Community | ![Create Community](./docs/screenshots/newcommunitypage.png) |
+| Communities List | ![Communities](./docs/screenshots/communitiespage.png)       |
+| Community Page   | ![Community Page](./docs/screenshots/communitypage.png)      |
 
 ---
 
-## 📄 Pages & Features
+## 📄 Features & Pages
 
-### Homepage
-- Displays a list of all user posts
-- Each post shows the author, the image, and a link to its details
+### 🏠 Homepage
 
-### Create Community
-- Allows authenticated users to create and submit a new community
-- Each community shows the name, description, and a link to its details
+* Displays all posts
+* Each post shows author, image, and links to details
 
-### Communities
-- Displays a list of all communities
-- Each community shows the name, description, and a link to its details
+### 🧩 Create Community
 
-### Community Details
-- Shows a specific community and its posts
-- Users can:
-  - View posts with the counts of likes, comments, and replies
-  - Access the posts of the community
+* Authenticated users can create a new community
+* Displays community name, description, and link to its page
 
-### Create Post
-- Allows authenticated users to create and submit a new post
-- User can choose a community to post in
+### 🌐 Communities List
 
-### Post Details
-- Shows a specific post and its comments
-- Users can:
-  - View comments
-  - Reply to comments
-  - See nested comment threads
+* Lists all available communities with details
 
----
+### 📚 Community Page
 
-## Tech Stack
+* Shows a community and its associated posts
+* Displays post info: likes, comments, replies
 
-- **React 19**
-- **Supabase** (Auth + DB)
-- **TailwindCSS**
-- **TanStack Query**
-- **React Router v7**
-- **Context API**
+### 📝 Create Post
+
+* Authenticated users can create a post within a selected community
+
+### 💬 Post Details
+
+* View individual post
+* Read and reply to comments (supports nested replies)
 
 ---
 
-## Getting Started
+## 🛠️ Tech Stack
+
+* **React 19**
+* **Supabase** (Auth + DB)
+* **TailwindCSS**
+* **TanStack Query**
+* **React Router v7**
+* **Context API**
+
+---
+
+## 🚀 Getting Started
 
 ```bash
 npm install
 npm run dev
-````
+```
 
 ---
 
-## What I Learned
+## 📚 What I Learned
 
-* Connecting Supabase for authentication and real-time database features
-* Organizing React state with the Context API
-* Leveraging TanStack Query for powerful caching and mutation handling
-* Building a clean and functional UI with TailwindCSS
+* How to set up and use Supabase for full-stack features
+* Structuring global state with Context API
+* Efficient data handling with TanStack Query
+* Clean UI design with TailwindCSS and component-driven architecture
 
 ---
 
-## Author
+## 🙏 Credits
+
+This project was inspired by [Build a Fullstack Reddit Clone](https://www.youtube.com/watch?v=_sSTzz13tVY) by [PedroTech (https://www.pedrotech.co)](https://www.youtube.com/@PedroTechnologies).
+Big thanks for the awesome tutorial!
+
+---
+
+## 👤 Author
 
 Made by [Mohamed Amoussa](https://amoussamohamed.fr)
 
+---
 
+Let me know if you want a French version or want to convert this into a Markdown file!
