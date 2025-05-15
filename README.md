@@ -13,7 +13,7 @@ This project helped me learn to:
 
 ## 🔗 Live Demo
 
-👉 [Try the app](https://your-deployment-link.com)
+👉 [Try the app](https://social-media-eight-gamma.vercel.app/)
 
 ---
 
@@ -93,7 +93,7 @@ npm run dev
 
 ## 🙏 Credits
 
-This project was inspired by [Build a Fullstack Reddit Clone](https://www.youtube.com/watch?v=_sSTzz13tVY) by [PedroTech (https://www.pedrotech.co)](https://www.youtube.com/@PedroTechnologies).
+This project was inspired by [Build and Deploy a Fullstack Social Media App with Authentication](https://www.youtube.com/watch?v=_sSTzz13tVY) by [PedroTech (https://www.pedrotech.co)](https://www.youtube.com/@PedroTechnologies).
 Big thanks for the awesome tutorial!
 
 ---
