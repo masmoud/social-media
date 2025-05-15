@@ -1,42 +1,47 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, signInWithGitHub, signOut } = useAuth();
+  const displayName = user?.user_metadata.name?.split(" ")[0] || user?.email;
+  const location = useLocation();
 
-  const displayName = user?.user_metadata.name || user?.email;
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <nav className="fixed top-0 w-full z-40 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <Link to={"/"} className="font-mono text-xl font-bold text-white">
+          {/* Logo */}
+          <Link to={"/"} className="font-mono text-xl font-bold text-white" onClick={closeMenu}>
             social<span className="text-purple-500">.media</span>
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to={"/"} className="text-gray-300 hover:text-white transition-colors">
-              Home
-            </Link>
-            <Link to={"/create"} className="text-gray-300 hover:text-white transition-colors">
-              Create Post
-            </Link>
-            <Link to={"/communities"} className="text-gray-300 hover:text-white transition-colors">
-              Communities
-            </Link>
-            <Link
-              to={"/community/create"}
-              className="text-gray-300 hover:text-white transition-colors">
-              Create Community
-            </Link>
+          <div className="hidden sm:flex items-center space-x-6">
+            {["/", "/create", "/communities", "/community/create"].map((path, index) => (
+              <Link
+                key={index}
+                to={path}
+                className={`text-gray-300 hover:text-white transition-colors ${
+                  location.pathname === path ? "text-white font-semibold" : ""
+                }`}>
+                {path === "/"
+                  ? "Home"
+                  : path
+                      .split("/")[1]
+                      .replace("-", " ")
+                      .replace(/^\w/, (c) => c.toUpperCase())}
+              </Link>
+            ))}
           </div>
 
-          {/* Desktop Auth */}
-          <div>
+          {/* Auth Section */}
+          <div className="hidden sm:flex items-center space-x-4">
             {user ? (
-              <div className="flex items-center space-x-4">
+              <>
                 {user.user_metadata.avatar_url && (
                   <img
                     src={user.user_metadata.avatar_url}
@@ -45,19 +50,23 @@ export const Navbar = () => {
                   />
                 )}
                 <span className="text-gray-300">{displayName}</span>
-                <button className="bg-red-500 px-3 py-1 rounded" onClick={signOut}>
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                  onClick={signOut}>
                   Sign Out
                 </button>
-              </div>
+              </>
             ) : (
-              <button className="bg-blue-500 px-3 py-1 rounded" onClick={signInWithGitHub}>
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
+                onClick={signInWithGitHub}>
                 Sign In With GitHub
               </button>
             )}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="sm:hidden">
             <button
               className="text-gray-300 focus:outline-none"
               aria-label="Toggle menu"
@@ -90,28 +99,54 @@ export const Navbar = () => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden bg-[rgba(10,10,10,0.9)]">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link
-                to={"/"}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">
-                Home
-              </Link>
-              <Link
-                to={"/create"}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">
-                Create Post
-              </Link>
-              <Link
-                to={"/communities"}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">
-                Communities
-              </Link>
-              <Link
-                to={"/community/create"}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">
-                Create Community
-              </Link>
+          <div className="sm:hidden bg-[rgba(10,10,10,0.95)] px-4 pb-4 rounded-b-lg">
+            <div className="pt-2 space-y-2">
+              {["/", "/create", "/communities", "/community/create"].map((path, index) => (
+                <Link
+                  key={index}
+                  to={path}
+                  onClick={closeMenu}
+                  className="block text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">
+                  {path === "/"
+                    ? "Home"
+                    : path
+                        .split("/")[1]
+                        .replace("-", " ")
+                        .replace(/^\w/, (c) => c.toUpperCase())}
+                </Link>
+              ))}
+
+              <div className="pt-2 border-t border-white/10">
+                {user ? (
+                  <div className="flex items-center space-x-3 pt-3">
+                    {user.user_metadata.avatar_url && (
+                      <img
+                        src={user.user_metadata.avatar_url}
+                        alt={displayName}
+                        className="w-8 h-8 rounded-full object-cover"
+                      />
+                    )}
+                    <span className="text-gray-300">{displayName}</span>
+                    <button
+                      className="ml-auto bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                      onClick={() => {
+                        signOut();
+                        closeMenu();
+                      }}>
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="w-full mt-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded"
+                    onClick={() => {
+                      signInWithGitHub();
+                      closeMenu();
+                    }}>
+                    Sign In With GitHub
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         )}
