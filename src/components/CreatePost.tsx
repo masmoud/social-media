@@ -1,13 +1,16 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { formatTitle } from "../lib/format";
+import { fetchCommunities } from "../queries/communities";
 import { supabase } from "../supabase-client";
+import type { Community } from "../types/Comunity";
 
 interface PostInput {
   title: string;
   content: string;
   avatar_url: string | null;
+  community_id?: number | null;
 }
 
 const createPost = async (post: PostInput, imageFile: File) => {
@@ -33,10 +36,18 @@ export const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [communityId, setCommunityId] = useState<number | null>(null);
+
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const { user } = useAuth();
+
+  const { data: communities } = useQuery<Community[], Error>({
+    queryKey: ["communities"],
+    queryFn: fetchCommunities,
+  });
 
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (data: { post: PostInput; imageFile: File }) =>
@@ -51,9 +62,15 @@ export const CreatePost = () => {
         title,
         content,
         avatar_url: user?.user_metadata.avatar_url || null,
+        community_id: communityId,
       },
       imageFile: selectedFile,
     });
+  };
+
+  const handleCommunityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setCommunityId(value ? Number(value) : null);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +97,7 @@ export const CreatePost = () => {
     <form
       onSubmit={handleSubmit}
       className="max-w-2xl mx-auto space-y-6 p-6 rounded-lg bg-zinc-900 border border-white/10 shadow-lg">
-      <h2 className="text-2xl font-bold text-white">Create a New Post</h2>
+      <h3 className="text-2xl font-bold text-white">New Post</h3>
 
       <div>
         <label htmlFor="title" className="block mb-1 text-white font-medium">
@@ -108,6 +125,21 @@ export const CreatePost = () => {
           placeholder="Write your content here..."
           className="w-full bg-zinc-800 text-white border border-white/10 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
+      </div>
+
+      <div>
+        <label> Select Community</label>
+        <select
+          id="community"
+          onChange={handleCommunityChange}
+          className="w-full bg-zinc-800 text-white border border-white/10 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <option value={""}> -- Choose a Community -- </option>
+          {communities?.map((community, key) => (
+            <option key={key} value={community.id} className="bg-zinc-800 text-white">
+              {community.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

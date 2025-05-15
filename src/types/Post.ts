@@ -8,3 +8,9 @@ export interface Post {
   like_count?: number;
   comment_count?: number;
 }
+
+export interface PostWithCommunity extends Post {
+  communities: {
+    name: string;
+  };
+}

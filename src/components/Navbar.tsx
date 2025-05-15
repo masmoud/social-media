@@ -5,7 +5,9 @@ import { useAuth } from "../hooks/useAuth";
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, signInWithGitHub, signOut } = useAuth();
-  const displayName = user?.user_metadata.name?.split(" ")[0] || user?.email;
+  const displayName =
+    user?.user_metadata.user_name.charAt(0).toUpperCase() +
+      user?.user_metadata.user_name.slice(1) || user?.email;
   const location = useLocation();
 
   const closeMenu = () => setMenuOpen(false);
